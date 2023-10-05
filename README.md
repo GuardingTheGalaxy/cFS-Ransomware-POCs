@@ -1,6 +1,4 @@
 # cFS-Ransomware-POCs
-Proof of concepts for various ransomware attack vectors on Core Flight System space vehicles 
-
 This repository linked from the IEEE Aerospace Conference 2024 paper, "Guarding the Galaxy: Satellite Ransomware and Countermeasures".
 
 It provides code examples for the proof-of-concept ransomware vectors demonstrated in the paper, designed to illustrate potential vulnerabilities in NASA's open source Core Flight System (cFS) architecture for research purposes. Note that none of these attack vectors exfiltrate data to outside sources or have been tested on cube satellite hardware - only simulated virtual instances as proof-of-concept demonstrations.
