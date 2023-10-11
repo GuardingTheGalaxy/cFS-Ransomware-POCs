@@ -1,4 +1,3 @@
-
 <h2>Attack vector 1</h2>
 <p>This vector involves monopolizing the cFS internal network bus by overloading it with an infinite loop, called many times over by the main application. This exhausts resources, filling up the internal memory and preventing message delivery between processes, eventually shutting down the telemetry server.</p>
 
